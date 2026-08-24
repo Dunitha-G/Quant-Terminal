@@ -38,7 +38,7 @@ import pandas as pd
 combined = pd.concat([data1, data2], axis=1).dropna()
 combined.columns = ['A1', 'A2']
 
-    combined['ZScore'] = stats.zscore(combined['Ratio'])
+combined['ZScore'] = stats.zscore(combined['Ratio'])
     return combined
 
 try:
