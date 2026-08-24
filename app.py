@@ -188,4 +188,4 @@ try:
     
     st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
-    # 8. Real-Time Multi-Asset Strategic Dashboard Table Section (Bottom Fold)
+) 
