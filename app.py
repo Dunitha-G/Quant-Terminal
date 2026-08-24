@@ -52,7 +52,7 @@ st.sidebar.markdown("<h3 style='color:#2962ff !important; font-family:monospace;
 st.sidebar.caption("Institutional Execution Strategy Interface")
 st.sidebar.markdown("---")
 
-selected_pair_label = st.sidebar.selectbox("🎯 Target Model Target Workspaces", list(PAIRS_CONFIG.keys()))
+selected_pair_label = st.sidebar.selectbox("🎯 Target Model Workspaces", list(PAIRS_CONFIG.keys()))
 active_pair = PAIRS_CONFIG[selected_pair_label]
 
 lookback_days = st.sidebar.slider("📅 Backtest Window Length (Days)", 30, 365, 120)
@@ -167,8 +167,8 @@ try:
         line=dict(color='#00e676', width=2),
         fill='tozeroy', fillcolor='rgba(0, 230, 118, 0.02)'
     ), row=2, col=1)
-    fig.add_trace(go.Scatter(x=date_axis, y=[2.0]*len(history_df), name='Upper Band (+2σ)', line=dict(color='#f23645', width=1, dash='dot')), row=2, col=1)
-    fig.add_trace(go.Scatter(x=date_axis, y=[-2.0]*len(history_df), name='Lower Band (-2σ)', line=dict(color='#089981', width=1, dash='dot')), row=2, col=1)
+    fig.add_trace(go.Scatter(x=date_axis, y=[2.0]*len(history_df), name='Upper Bound (+2σ)', line=dict(color='#f23645', width=1, dash='dot')), row=2, col=1)
+    fig.add_trace(go.Scatter(x=date_axis, y=[-2.0]*len(history_df), name='Lower Bound (-2σ)', line=dict(color='#089981', width=1, dash='dot')), row=2, col=1)
     fig.add_trace(go.Scatter(x=date_axis, y=[0.0]*len(history_df), name='Zero Axis Parity', line=dict(color='#434651', width=1)), row=2, col=1)
 
     fig.update_layout(
