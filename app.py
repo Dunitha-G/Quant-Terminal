@@ -1,6 +1,7 @@
 import streamlit as st
 import yfinance as yf
 import numpy as np
+import pandas as pd
 import plotly.graph_objects as go
 from scipy import stats
 
@@ -31,15 +32,11 @@ lookback = st.sidebar.slider("Historical Lookback (Days)", 30, 365, 90)
 def fetch_and_calculate(a1, a2, days):
     data1 = yf.download(a1, period=f"{days}d")["Close"]
     data2 = yf.download(a2, period=f"{days}d")["Close"]
-    
-    # Structural alignment
-    # Structural alignment
-import pandas as pd
-combined = pd.concat([data1, data2], axis=1).dropna()
-combined.columns = ['A1', 'A2']
-
-combined['ZScore'] = stats.zscore(combined['Ratio'])
- return combined
+    combined = pd.concat([data1, data2], axis=1).dropna()
+    combined.columns = ['A1', 'A2']
+    combined['Ratio'] = combined['A1'] / combined['A2']
+    combined['ZScore'] = stats.zscore(combined['Ratio'])
+    return combined
 
 try:
     df = fetch_and_calculate(asset_1, asset_2, lookback)
@@ -65,7 +62,6 @@ try:
         st.markdown("</div>", unsafe_allow_html=True)
 
     # 5. Interactive Time-Series Charts
-    st.subplots_adjust()
     st.subheader("📈 Real-Time Rolling Deviation Matrix")
     
     fig = go.Figure()
@@ -97,4 +93,5 @@ with st.expander("Deconstruct the Econometric Framework Used Here"):
     When the absolute value of $Z_t$ breaks past our **$\pm2.0\sigma$ boundary thresholds**, the system rejects the random walk null hypothesis. This flags a statistically 
     significant pricing divergence, indicating a high-probability mean-reversion trading setup.
     """)
+
 
