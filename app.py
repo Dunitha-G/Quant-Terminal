@@ -33,9 +33,11 @@ def fetch_and_calculate(a1, a2, days):
     data2 = yf.download(a2, period=f"{days}d")["Close"]
     
     # Structural alignment
-    combined = yf.concat([data1, data2], axis=1).dropna()
-    combined.columns = ['A1', 'A2']
-    combined['Ratio'] = combined['A1'] / combined['A2']
+    # Structural alignment
+import pandas as pd
+combined = pd.concat([data1, data2], axis=1).dropna()
+combined.columns = ['A1', 'A2']
+
     combined['ZScore'] = stats.zscore(combined['Ratio'])
     return combined
 
