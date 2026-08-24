@@ -39,7 +39,7 @@ combined = pd.concat([data1, data2], axis=1).dropna()
 combined.columns = ['A1', 'A2']
 
 combined['ZScore'] = stats.zscore(combined['Ratio'])
-return combined
+ return combined
 
 try:
     df = fetch_and_calculate(asset_1, asset_2, lookback)
